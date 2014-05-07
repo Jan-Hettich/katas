@@ -15,11 +15,11 @@ describe P do
   describe "array representation" do
     let(:n) {3}
 
-    it "describes identity" do
+    specify "for identity" do
       expect(id.to_a).to eq([1,2,3])
     end
 
-    it "describes rotation" do
+    specify "for rotation" do
       expect(rot.to_a).to eq([2,3,1])
     end
 
