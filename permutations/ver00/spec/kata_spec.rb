@@ -81,7 +81,6 @@ describe P do
 
     it "is composable (as proc)" do
       s = q.compose(p)
-      (1..5).map(&s).should == ((1..5).map(&p).map(&q))
       expect((1..5).map(&s)).to eq((1..5).map(&p).map(&q))
     end
 
@@ -91,9 +90,46 @@ describe P do
 
   end
 
-end
+  context "construction from cycle" do
 
-describe C do
+    let (:c1){[1,3,2]}
 
+    it "can be created from a cylce" do
+      expect(P.from_cycle(c1,5)).to be_an_instance_of P
+      expect(P.from_cycle(c1,5).to_s).to eq("P:[3, 1, 2, 4, 5]")
+    end
+
+    it "converts empty cycle to the identity perm" do
+      expect(P.from_cycle([],5)).to eq(P.new(1,2,3,4,5))
+    end
+
+  end 
+
+  context "cycle decomposition" do
+
+    it "breaks [1,2,3,4,5] into [1],[2],[3],[4],[5]" do
+      expect(i.cycles).to eq([[1],[2],[3],[4],[5]])
+    end
+
+    it "correctly breaks p" do
+      expect(p.cycles).to eq([[1,2,5],[3,4]])
+    end
+
+    it "correctly breaks q" do
+      expect(q[1]).to eq(3)
+      expect(q.cycles).to eq([[1,3,2],[4],[5]])
+    end
+
+  end
+
+  it "computes the order of a permutation" do
+    expect(p.order).to eq(3)
+    expect(q.order).to eq(2)
+  end
+
+  it "computes the sign of a permutation" do
+    expect(p.sign).to eq("-")
+    expect(q.sign).to eq("+")
+  end
 
 end

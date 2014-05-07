@@ -52,13 +52,40 @@ class P
     P.new(*(1..array.size).map(&first).map(&self))     
   end
 
+  def self.from_cycle(c,n)
+    p_array = (1..n).map do |i| 
+      j = c.index(i)
+      j ? c[(j+1)%c.length] : i
+    end
+    P.new *p_array
+  end
+
+  def cycles
+    cycles = []
+    bucket = array.clone
+    while !bucket.empty? do
+      cycle = []
+      next_elt = bucket.min
+      until cycle.include? next_elt do
+        cycle << next_elt
+        bucket -= [next_elt]
+        next_elt = self[next_elt]
+      end 
+      cycles << cycle
+    end
+    cycles
+  end
+
+  def order
+    cycles.reduce(0){|s,c| s += c.count - 1}
+  end
+
+  def sign
+    order.even? ? "+" : "-"
+  end
+
   protected
 
     attr_accessor :array
-
-end
-
-
-class C
 
 end
