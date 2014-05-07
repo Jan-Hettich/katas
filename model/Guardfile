@@ -2,6 +2,7 @@
 # More info at https://github.com/guard/guard#readme
 
 guard :rspec do
-  watch("code.rb")  {"spec/spec.rb"} 
-  watch("spec/spec.rb")
+  watch("kata.rb")  {"spec/kata_spec.rb"} 
+  watch("spec/kata_spec.rb")
 end
+
