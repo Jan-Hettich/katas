@@ -1,0 +1,8 @@
+# A sample Guardfile
+# More info at https://github.com/guard/guard#readme
+
+guard :rspec, cmd: 'bundle exec rspec' do
+  watch("kata.rb")  {"spec/kata_spec.rb"} 
+  watch("spec/kata_spec.rb")
+end
+
