@@ -16,6 +16,7 @@ GEM
     guard-rspec (4.3.1)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
+    humanize (1.1.0)
     listen (2.7.9)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -51,5 +52,6 @@ PLATFORMS
 
 DEPENDENCIES
   guard-rspec
+  humanize
   rake
   rb-fsevent
